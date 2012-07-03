@@ -1,9 +1,7 @@
 package org.jgroups.protocols;
 
 import org.jgroups.Address;
-import org.jgroups.annotations.Experimental;
 import org.jgroups.annotations.Property;
-import org.jgroups.annotations.Unsupported;
 import org.jgroups.util.Util;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;

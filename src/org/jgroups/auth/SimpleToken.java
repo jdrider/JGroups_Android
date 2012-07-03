@@ -2,8 +2,6 @@ package org.jgroups.auth;
 
 import java.io.DataInput;
 import java.io.DataOutput;
-import java.io.IOException;
-
 import org.jgroups.Message;
 import org.jgroups.annotations.Property;
 import org.jgroups.util.Util;

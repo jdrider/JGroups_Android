@@ -1,7 +1,6 @@
 package org.jgroups.client;
 
 import org.jgroups.annotations.Experimental;
-import org.jgroups.annotations.Unsupported;
 import org.jgroups.logging.Log;
 import org.jgroups.logging.LogFactory;
 import org.jgroups.protocols.STOMP;

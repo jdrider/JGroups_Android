@@ -20,7 +20,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.jgroups.Version;
 import org.jgroups.annotations.Property;
-import org.jgroups.stack.Configurator;
 import org.jgroups.stack.Protocol;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;

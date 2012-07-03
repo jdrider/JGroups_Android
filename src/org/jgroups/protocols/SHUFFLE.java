@@ -4,7 +4,6 @@ import org.jgroups.Event;
 import org.jgroups.Message;
 import org.jgroups.annotations.Experimental;
 import org.jgroups.annotations.Property;
-import org.jgroups.annotations.Unsupported;
 import org.jgroups.stack.Protocol;
 import org.jgroups.util.TimeScheduler;
 

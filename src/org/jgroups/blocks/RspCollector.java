@@ -2,7 +2,6 @@
 package org.jgroups.blocks;
 
 import org.jgroups.Address;
-import org.jgroups.Message;
 import org.jgroups.View;
 
 

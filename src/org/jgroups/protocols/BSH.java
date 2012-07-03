@@ -7,8 +7,6 @@ import bsh.Interpreter;
 import org.jgroups.annotations.*;
 import org.jgroups.stack.Protocol;
 import org.jgroups.util.Util;
-import org.jgroups.Global;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;

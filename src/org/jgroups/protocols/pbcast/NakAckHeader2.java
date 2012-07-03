@@ -4,7 +4,6 @@ package org.jgroups.protocols.pbcast;
 import org.jgroups.Address;
 import org.jgroups.Global;
 import org.jgroups.Header;
-import org.jgroups.util.SeqnoList;
 import org.jgroups.util.Util;
 
 import java.io.DataInput;

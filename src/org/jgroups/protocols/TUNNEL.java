@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.jgroups.Address;
 import org.jgroups.Event;
-import org.jgroups.Global;
 import org.jgroups.Message;
 import org.jgroups.PhysicalAddress;
 import org.jgroups.annotations.Experimental;
