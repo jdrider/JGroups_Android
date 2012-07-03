@@ -7,10 +7,10 @@ import org.jgroups.annotations.*;
 import org.jgroups.stack.Protocol;
 import org.jgroups.util.Util;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import javax.swing.*;
+//import java.awt.*;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
 import java.util.List;
@@ -54,7 +54,7 @@ public class DISCARD extends Protocol {
     @Property(description="Number of subsequent multicasts to drop in the down direction",writable=true)
     int drop_down_multicasts=0;
 
-    private DiscardDialog discard_dialog=null;
+    //private DiscardDialog discard_dialog=null;
 
     @Property(name="gui", description="use a GUI or not")
     protected boolean use_gui=false;
@@ -73,8 +73,8 @@ public class DISCARD extends Protocol {
     
     public void setLocalAddress(Address localAddress){
     	this.localAddress =localAddress;
-        if(discard_dialog != null)
-            discard_dialog.setTitle(localAddress != null? localAddress.toString() : "n/a");
+//        if(discard_dialog != null)
+//            discard_dialog.setTitle(localAddress != null? localAddress.toString() : "n/a");
     }
 
     public void setExcludeItself(boolean excludeItself) {
@@ -125,36 +125,36 @@ public class DISCARD extends Protocol {
     public void resetIgnoredMembers() {ignoredMembers.clear();}
 
 
-    @ManagedOperation
-    public void startGui() {
-        if(discard_dialog == null) {
-            discard_dialog=new DiscardDialog();
-            discard_dialog.init();
-            discard_dialog.setTitle(localAddress != null? localAddress.toString() : "n/a");
-            discard_dialog.handleView(members);
-        }
-    }
-
-    @ManagedOperation
-    public void stopGui() {
-        if(discard_dialog != null)
-            discard_dialog.dispose();
-        discard_dialog=null;
-    }
-
-    public void start() throws Exception {
-        super.start();
-        if(use_gui) {
-            discard_dialog=new DiscardDialog();
-            discard_dialog.init();
-        }
-    }
-
-    public void stop() {
-        super.stop();
-        if(discard_dialog != null)
-            discard_dialog.dispose();
-    }
+//    @ManagedOperation
+//    public void startGui() {
+//        if(discard_dialog == null) {
+//            discard_dialog=new DiscardDialog();
+//            discard_dialog.init();
+//            discard_dialog.setTitle(localAddress != null? localAddress.toString() : "n/a");
+//            discard_dialog.handleView(members);
+//        }
+//    }
+//
+//    @ManagedOperation
+//    public void stopGui() {
+//        if(discard_dialog != null)
+//            discard_dialog.dispose();
+//        discard_dialog=null;
+//    }
+//
+//    public void start() throws Exception {
+//        super.start();
+//        if(use_gui) {
+//            discard_dialog=new DiscardDialog();
+//            discard_dialog.init();
+//        }
+//    }
+//
+//    public void stop() {
+//        super.stop();
+//        if(discard_dialog != null)
+//            discard_dialog.dispose();
+//    }
 
     public Object up(Event evt) {
         Message msg;
@@ -162,8 +162,8 @@ public class DISCARD extends Protocol {
 
         if(evt.getType() == Event.SET_LOCAL_ADDRESS) {
             localAddress=(Address)evt.getArg();
-            if(discard_dialog != null)
-                discard_dialog.setTitle("Discard dialog (" + localAddress + ")");
+//            if(discard_dialog != null)
+//                discard_dialog.setTitle("Discard dialog (" + localAddress + ")");
         }
 
         if(evt.getType() == Event.MSG) {
@@ -262,14 +262,14 @@ public class DISCARD extends Protocol {
                 members.clear();
                 members.addAll(mbrs);
                 ignoredMembers.retainAll(mbrs); // remove all non members
-                if(discard_dialog != null)
-                    discard_dialog.handleView(mbrs);
+//                if(discard_dialog != null)
+//                    discard_dialog.handleView(mbrs);
                 break;
 
             case Event.SET_LOCAL_ADDRESS:
                 localAddress=(Address)evt.getArg();
-                if(discard_dialog != null)
-                    discard_dialog.setTitle("Discard dialog (" + localAddress + ")");
+//                if(discard_dialog != null)
+//                    discard_dialog.setTitle("Discard dialog (" + localAddress + ")");
                 break;
         }
 
@@ -337,81 +337,81 @@ public class DISCARD extends Protocol {
     }
 
 
-    private class DiscardDialog extends JFrame implements ActionListener {
-        private JButton start_discarding_button=new JButton("start discarding");
-        private JButton stop_discarding_button=new JButton("stop discarding");
-        JPanel checkboxes=new JPanel();
-
-
-        private DiscardDialog() {
-        }
-
-        void init() {
-            getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-            checkboxes.setLayout(new BoxLayout(checkboxes, BoxLayout.Y_AXIS));
-            getContentPane().add(start_discarding_button);
-            getContentPane().add(stop_discarding_button);
-            start_discarding_button.addActionListener(this);
-            stop_discarding_button.addActionListener(this);
-            getContentPane().add(checkboxes);
-            pack();
-            setVisible(true);
-            setTitle(localAddress != null? localAddress.toString() : "n/a");
-        }
-
-
-        public void actionPerformed(ActionEvent e) {
-            String command=e.getActionCommand();
-            if(command.startsWith("start")) {
-                discard_all=true;
-            }
-            else if(command.startsWith("stop")) {
-                discard_all=false;
-                Component[] comps=checkboxes.getComponents();
-                for(Component c: comps) {
-                    if(c instanceof JCheckBox) {
-                        ((JCheckBox)c).setSelected(false);
-                    }
-                }
-            }
-        }
-
-        void handleView(Collection<Address> mbrs) {
-            checkboxes.removeAll();
-            for(final Address addr: mbrs) {
-                final MyCheckBox box=new MyCheckBox("discard traffic from " + addr, addr);
-                box.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        if(box.isSelected()) {
-                            ignoredMembers.add(addr);
-                        }
-                        else {
-                            ignoredMembers.remove(addr);
-                        }
-                    }
-                });
-                checkboxes.add(box);
-            }
-
-            for(Component comp: checkboxes.getComponents()) {
-                MyCheckBox box=(MyCheckBox)comp;
-                if(ignoredMembers.contains(box.mbr))
-                    box.setSelected(true);
-            }
-            pack();
-        }
-    }
-
-    private static class MyCheckBox extends JCheckBox {
-        final Address mbr;
-
-        public MyCheckBox(String name, Address member) {
-            super(name);
-            this.mbr=member;
-        }
-
-        public String toString() {
-            return super.toString() + " [mbr=" + mbr + "]";
-        }
-    }
+//    private class DiscardDialog extends JFrame implements ActionListener {
+//        private JButton start_discarding_button=new JButton("start discarding");
+//        private JButton stop_discarding_button=new JButton("stop discarding");
+//        JPanel checkboxes=new JPanel();
+//
+//
+//        private DiscardDialog() {
+//        }
+//
+//        void init() {
+//            getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+//            checkboxes.setLayout(new BoxLayout(checkboxes, BoxLayout.Y_AXIS));
+//            getContentPane().add(start_discarding_button);
+//            getContentPane().add(stop_discarding_button);
+//            start_discarding_button.addActionListener(this);
+//            stop_discarding_button.addActionListener(this);
+//            getContentPane().add(checkboxes);
+//            pack();
+//            setVisible(true);
+//            setTitle(localAddress != null? localAddress.toString() : "n/a");
+//        }
+//
+//
+//        public void actionPerformed(ActionEvent e) {
+//            String command=e.getActionCommand();
+//            if(command.startsWith("start")) {
+//                discard_all=true;
+//            }
+//            else if(command.startsWith("stop")) {
+//                discard_all=false;
+//                Component[] comps=checkboxes.getComponents();
+//                for(Component c: comps) {
+//                    if(c instanceof JCheckBox) {
+//                        ((JCheckBox)c).setSelected(false);
+//                    }
+//                }
+//            }
+//        }
+//
+//        void handleView(Collection<Address> mbrs) {
+//            checkboxes.removeAll();
+//            for(final Address addr: mbrs) {
+//                final MyCheckBox box=new MyCheckBox("discard traffic from " + addr, addr);
+//                box.addActionListener(new ActionListener() {
+//                    public void actionPerformed(ActionEvent e) {
+//                        if(box.isSelected()) {
+//                            ignoredMembers.add(addr);
+//                        }
+//                        else {
+//                            ignoredMembers.remove(addr);
+//                        }
+//                    }
+//                });
+//                checkboxes.add(box);
+//            }
+//
+//            for(Component comp: checkboxes.getComponents()) {
+//                MyCheckBox box=(MyCheckBox)comp;
+//                if(ignoredMembers.contains(box.mbr))
+//                    box.setSelected(true);
+//            }
+//            pack();
+//        }
+//    }
+//
+//    private static class MyCheckBox extends JCheckBox {
+//        final Address mbr;
+//
+//        public MyCheckBox(String name, Address member) {
+//            super(name);
+//            this.mbr=member;
+//        }
+//
+//        public String toString() {
+//            return super.toString() + " [mbr=" + mbr + "]";
+//        }
+//    }
 }
