@@ -3,7 +3,7 @@ package org.jgroups.util;
 import org.jgroups.Global;
 
 import java.net.*;
-import java.rmi.server.UID;
+//import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;

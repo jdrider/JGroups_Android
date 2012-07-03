@@ -4,12 +4,11 @@ package org.jgroups.blocks;
 
 import org.jgroups.*;
 import org.jgroups.annotations.Unsupported;
-import org.jgroups.jmx.JmxConfigurator;
 import org.jgroups.logging.Log;
 import org.jgroups.logging.LogFactory;
 import org.jgroups.util.Util;
 
-import javax.management.MBeanServer;
+//import javax.management.MBeanServer;
 import java.io.*;
 import java.util.*;
 
@@ -87,12 +86,12 @@ public class ReplicatedTree extends ReceiverAdapter {
         channel.setReceiver(this);
         channel.connect(this.groupname);
 
-        if(jmx) {
-            MBeanServer server=Util.getMBeanServer();
-            if(server == null)
-                throw new Exception("No MBeanServers found; need to run with an MBeanServer present, or inside JDK 5");
-            JmxConfigurator.registerChannel(channel, server, "jgroups", channel.getClusterName() , true);
-        }
+//        if(jmx) {
+//            MBeanServer server=Util.getMBeanServer();
+//            if(server == null)
+//                throw new Exception("No MBeanServers found; need to run with an MBeanServer present, or inside JDK 5");
+//            JmxConfigurator.registerChannel(channel, server, "jgroups", channel.getClusterName() , true);
+//        }
         start();
     }
 

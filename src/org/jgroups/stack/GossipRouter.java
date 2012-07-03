@@ -6,7 +6,7 @@ import org.jgroups.protocols.PingData;
 import org.jgroups.annotations.ManagedAttribute;
 import org.jgroups.annotations.ManagedOperation;
 import org.jgroups.annotations.Property;
-import org.jgroups.jmx.JmxConfigurator;
+//import org.jgroups.jmx.JmxConfigurator;
 import org.jgroups.logging.Log;
 import org.jgroups.logging.LogFactory;
 import org.jgroups.util.*;
@@ -240,11 +240,11 @@ public class GossipRouter {
             + "the managed attributes have already been set. Brings the Router into a fully functional state.")
     public void start() throws Exception {
         if(running.compareAndSet(false, true)) {           
-            if(jmx && !registered) {
-                MBeanServer server=Util.getMBeanServer();
-                JmxConfigurator.register(this, server, "jgroups:name=GossipRouter");
-                registered=true;
-            }
+//            if(jmx && !registered) {
+//                MBeanServer server=Util.getMBeanServer();
+//                JmxConfigurator.register(this, server, "jgroups:name=GossipRouter");
+//                registered=true;
+//            }
     
             if(bindAddressString != null) {
                 bindAddress=InetAddress.getByName(bindAddressString);

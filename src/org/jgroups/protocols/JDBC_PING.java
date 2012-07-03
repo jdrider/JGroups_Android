@@ -3,8 +3,8 @@ package org.jgroups.protocols;
 import org.jgroups.Address;
 import org.jgroups.annotations.Property;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+//import javax.naming.InitialContext;
+//import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -88,7 +88,7 @@ public class JDBC_PING extends FILE_PING {
             loadDriver();
         }
         else {
-            dataSourceFromJNDI = getDataSourceFromJNDI(datasource_jndi_name.trim());
+            //dataSourceFromJNDI = getDataSourceFromJNDI(datasource_jndi_name.trim());
         }
         attemptSchemaInitialization();
     }
@@ -310,39 +310,39 @@ public class JDBC_PING extends FILE_PING {
         }
     }
     
-    protected DataSource getDataSourceFromJNDI(String name) {
-        final DataSource dataSource;
-        InitialContext ctx = null;
-        try {
-            ctx = new InitialContext();
-            Object wathever = ctx.lookup(name);
-            if (wathever == null) {
-                throw new IllegalArgumentException(
-                            "JNDI name " + name + " is not bound");
-            } else if (!(wathever instanceof DataSource)) {
-                throw new IllegalArgumentException(
-                            "JNDI name " + name + " was found but is not a DataSource");
-            } else {
-                dataSource = (DataSource) wathever;
-                if (log.isDebugEnabled()) {
-                    log.debug(
-                            "Datasource found via JNDI lookup via name: '"+ name + "'.");
-                }
-                return dataSource;
-            }
-        } catch (NamingException e) {
-            throw new IllegalArgumentException(
-                        "Could not lookup datasource " + name, e);
-        } finally {
-            if (ctx != null) {
-                try {
-                    ctx.close();
-                } catch (NamingException e) {
-                    log.warn("Failed to close naming context.", e);
-                }
-            }
-        }
-    }
+//    protected DataSource getDataSourceFromJNDI(String name) {
+//        final DataSource dataSource;
+//        InitialContext ctx = null;
+//        try {
+//            ctx = new InitialContext();
+//            Object wathever = ctx.lookup(name);
+//            if (wathever == null) {
+//                throw new IllegalArgumentException(
+//                            "JNDI name " + name + " is not bound");
+//            } else if (!(wathever instanceof DataSource)) {
+//                throw new IllegalArgumentException(
+//                            "JNDI name " + name + " was found but is not a DataSource");
+//            } else {
+//                dataSource = (DataSource) wathever;
+//                if (log.isDebugEnabled()) {
+//                    log.debug(
+//                            "Datasource found via JNDI lookup via name: '"+ name + "'.");
+//                }
+//                return dataSource;
+//            }
+//        } catch (NamingException e) {
+//            throw new IllegalArgumentException(
+//                        "Could not lookup datasource " + name, e);
+//        } finally {
+//            if (ctx != null) {
+//                try {
+//                    ctx.close();
+//                } catch (NamingException e) {
+//                    log.warn("Failed to close naming context.", e);
+//                }
+//            }
+//        }
+//    }
     
     protected void verifyconfigurationParameters() {
         if (stringIsEmpty(this.connection_url) ||

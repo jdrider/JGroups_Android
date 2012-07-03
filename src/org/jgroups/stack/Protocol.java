@@ -8,7 +8,7 @@ import org.jgroups.annotations.ManagedAttribute;
 import org.jgroups.annotations.ManagedOperation;
 import org.jgroups.annotations.Property;
 import org.jgroups.conf.ClassConfigurator;
-import org.jgroups.jmx.ResourceDMBean;
+//import org.jgroups.jmx.ResourceDMBean;
 import org.jgroups.logging.Log;
 import org.jgroups.logging.LogFactory;
 import org.jgroups.protocols.TP;
@@ -233,7 +233,10 @@ public abstract class Protocol {
                     }
                     else if(method_name.startsWith("set")) {
                         String stem=method_name.substring(3);
-                        Method getter=ResourceDMBean.findGetter(getClass(), stem);
+                        //Method getter=ResourceDMBean.findGetter(getClass(), stem);
+                        
+                        Method getter = null;
+                        
                         if(getter != null) {
                             try {
                                 Object value=getter.invoke(this);

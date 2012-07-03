@@ -4,8 +4,8 @@ import org.jgroups.annotations.ManagedAttribute;
 import org.jgroups.annotations.ManagedOperation;
 import org.jgroups.util.Util;
 
-import javax.management.MBeanRegistrationException;
-import javax.management.MalformedObjectNameException;
+//import javax.management.MBeanRegistrationException;
+//import javax.management.MalformedObjectNameException;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -124,7 +124,7 @@ public class MemcachedConnector implements Runnable {
 
 
     @ManagedOperation
-    public void start() throws IOException, MalformedObjectNameException, MBeanRegistrationException {
+    public void start() throws IOException{ //, MalformedObjectNameException, MBeanRegistrationException {
         srv_sock=new ServerSocket(port, 50, bind_addr);
         if(thread_pool == null) {
             thread_pool=new ThreadPoolExecutor(core_threads, max_threads, idle_time, TimeUnit.MILLISECONDS,

@@ -5,7 +5,6 @@ import org.jgroups.TimeoutException;
 import org.jgroups.auth.AuthToken;
 import org.jgroups.blocks.Connection;
 import org.jgroups.conf.ClassConfigurator;
-import org.jgroups.jmx.JmxConfigurator;
 import org.jgroups.logging.Log;
 import org.jgroups.protocols.*;
 import org.jgroups.protocols.pbcast.FLUSH;
@@ -3943,21 +3942,21 @@ public class Util {
 	}
 
 
-    public static void registerChannel(JChannel channel, String name) {
-        MBeanServer server=Util.getMBeanServer();
-        if(server != null) {
-            try {
-                JmxConfigurator.registerChannel(channel,
-                                                server,
-                                                (name != null? name : "jgroups"),
-                                                channel.getClusterName(),
-                                                true);
-            }
-            catch(Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    public static void registerChannel(JChannel channel, String name) {
+//        MBeanServer server=Util.getMBeanServer();
+//        if(server != null) {
+//            try {
+//                JmxConfigurator.registerChannel(channel,
+//                                                server,
+//                                                (name != null? name : "jgroups"),
+//                                                channel.getClusterName(),
+//                                                true);
+//            }
+//            catch(Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
 
 
