@@ -11,7 +11,7 @@ import org.jgroups.util.Util;
 
 import java.io.DataInput;
 import java.io.DataOutput;
-import java.lang.management.ManagementFactory;
+//import java.lang.management.ManagementFactory;
 import java.util.*;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -357,9 +357,16 @@ public class STABLE extends Protocol {
                 initialized=true;
 
             if(ergonomics && cap > 0) {
-                long max_heap=(long)(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax() * cap);
+                //long max_heap=(long)(ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax() * cap);
+                
+            	//16MB is the per application heap size of a majority of Android devices.
+            	//1048576 = bytes/MB
+                long max_heap = 16 * 1048576; 
+                
                 long new_size=tmp.size() * original_max_bytes;
+                
                 max_bytes=Math.min(max_heap, new_size);
+                
                 if(log.isDebugEnabled())
                     log.debug("[ergonomics] setting max_bytes to " + Util.printBytes(max_bytes) + " (" + tmp.size() + " members)");
             }

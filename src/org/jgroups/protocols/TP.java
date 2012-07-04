@@ -17,7 +17,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InterruptedIOException;
-import java.lang.management.ManagementFactory;
+//import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.text.NumberFormat;
@@ -25,6 +25,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
+import java.lang.Thread;
 
 
 /**
@@ -770,7 +771,9 @@ public abstract class TP extends Protocol {
 
     @ManagedAttribute(description="Returns the number of live threads in the JVM")
     public static int getNumThreads() {
-        return ManagementFactory.getThreadMXBean().getThreadCount();
+        //return ManagementFactory.getThreadMXBean().getThreadCount();
+        
+    	return Thread.activeCount();
     }
 
     public void setRegularRejectionPolicy(String rejection_policy) {
