@@ -52,7 +52,7 @@
     <class id="89" name="org.jgroups.protocols.COUNTER$CounterHeader"/>
     <class id="90" name="org.jgroups.protocols.MERGE3$MergeHeader"/>
     <class id="91" name="org.jgroups.protocols.RSVP$RsvpHeader"/>
-    <class id="92" name="org.jgroups.tests.perf.MPerf$MPerfHeader"/>
+    <!--<class id="92" name="org.jgroups.tests.perf.MPerf$MPerfHeader"/>-->
     <class id="93" name="org.jgroups.protocols.pbcast.NakAckHeader2"/>
     <class id="94" name="org.jgroups.util.SeqnoList"/>
     <class id="95" name="org.jgroups.protocols.tom.ToaHeader"/>
