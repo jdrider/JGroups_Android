@@ -9,17 +9,12 @@ at https://github.com/fallen/JGroups.
 
                      ----- Notable Changes -----
 
-The most drastic change was the removal of any code that referenced JMX (javax.management.*)  There
-is currently no support for this on Android.  I replaced some of the code with Android equivalent
-code where I could.  (Thread Count and Heap Size queries)
+The most drastic change was the removal of any code that referenced JMX (javax.management.*)  There is currently no support for this on Android.  I replaced some of the code with Android equivalent code where I could.  (Thread Count and Heap Size queries)
 
 
                      ----- Instructions for Use -----
 
-The .jar file found in the dist directory can be placed in the /libs directory of an Android
-project.
+The .jar file found in the dist directory can be placed in the /libs directory of an Android project.
 
-Many Android devices do not have support for sending and receiving multicast packets so I would
-recommend using the BPING protocol if possible.  The configuration file at /dist/udp_bping.xml can
-be used to configure a JChannel to use the BPING protocol. 
+Many Android devices do not have support for sending and receiving multicast packets so I would recommend using the BPING protocol if possible.  The configuration file at /dist/udp_bping.xml can be used to configure a JChannel to use the BPING protocol. 
 
