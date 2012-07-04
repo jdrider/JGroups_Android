@@ -13,11 +13,11 @@ import org.jgroups.stack.IpAddress;
 import org.jgroups.stack.Protocol;
 import org.jgroups.stack.ProtocolStack;
 
-import javax.management.MBeanServer;
-import javax.management.MBeanServerFactory;
+//import javax.management.MBeanServer;
+//import javax.management.MBeanServerFactory;
 import java.io.*;
 import java.lang.annotation.Annotation;
-import java.lang.management.ManagementFactory;
+//import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 import java.lang.reflect.Field;
@@ -1434,41 +1434,41 @@ public class Util {
 
     public static String dumpThreads() {
         StringBuilder sb=new StringBuilder();
-        ThreadMXBean bean=ManagementFactory.getThreadMXBean();
-        long[] ids=bean.getAllThreadIds();
-        _printThreads(bean, ids, sb);
-        long[] deadlocks=bean.findDeadlockedThreads();
-        if(deadlocks != null && deadlocks.length > 0) {
-            sb.append("deadlocked threads:\n");
-            _printThreads(bean, deadlocks, sb);
-        }
-
-        deadlocks=bean.findMonitorDeadlockedThreads();
-        if(deadlocks != null && deadlocks.length > 0) {
-            sb.append("monitor deadlocked threads:\n");
-            _printThreads(bean, deadlocks, sb);
-        }
+//        ThreadMXBean bean=ManagementFactory.getThreadMXBean();
+//        long[] ids=bean.getAllThreadIds();
+//        _printThreads(bean, ids, sb);
+//        long[] deadlocks=bean.findDeadlockedThreads();
+//        if(deadlocks != null && deadlocks.length > 0) {
+//            sb.append("deadlocked threads:\n");
+//            _printThreads(bean, deadlocks, sb);
+//        }
+//
+//        deadlocks=bean.findMonitorDeadlockedThreads();
+//        if(deadlocks != null && deadlocks.length > 0) {
+//            sb.append("monitor deadlocked threads:\n");
+//            _printThreads(bean, deadlocks, sb);
+//        }
         return sb.toString();
     }
 
 
-    protected static void _printThreads(ThreadMXBean bean, long[] ids, StringBuilder sb) {
-        ThreadInfo[] threads=bean.getThreadInfo(ids, 20);
-        for(int i=0; i < threads.length; i++) {
-            ThreadInfo info=threads[i];
-            if(info == null)
-                continue;
-            sb.append(info.getThreadName()).append(":\n");
-            StackTraceElement[] stack_trace=info.getStackTrace();
-            for(int j=0; j < stack_trace.length; j++) {
-                StackTraceElement el=stack_trace[j];
-                sb.append("    at ").append(el.getClassName()).append(".").append(el.getMethodName());
-                sb.append("(").append(el.getFileName()).append(":").append(el.getLineNumber()).append(")");
-                sb.append("\n");
-            }
-            sb.append("\n\n");
-        }
-    }
+//    protected static void _printThreads(ThreadMXBean bean, long[] ids, StringBuilder sb) {
+//        ThreadInfo[] threads=bean.getThreadInfo(ids, 20);
+//        for(int i=0; i < threads.length; i++) {
+//            ThreadInfo info=threads[i];
+//            if(info == null)
+//                continue;
+//            sb.append(info.getThreadName()).append(":\n");
+//            StackTraceElement[] stack_trace=info.getStackTrace();
+//            for(int j=0; j < stack_trace.length; j++) {
+//                StackTraceElement el=stack_trace[j];
+//                sb.append("    at ").append(el.getClassName()).append(".").append(el.getMethodName());
+//                sb.append("(").append(el.getFileName()).append(":").append(el.getLineNumber()).append(")");
+//                sb.append("\n");
+//            }
+//            sb.append("\n\n");
+//        }
+//    }
 
 
     public static boolean interruptAndWaitToDie(Thread t) {
@@ -3922,24 +3922,24 @@ public class Util {
         return !(mbrs == null || mbrs.isEmpty()) && local_addr.equals(mbrs.iterator().next());
     }
 
-    public static MBeanServer getMBeanServer() {
-		ArrayList servers = MBeanServerFactory.findMBeanServer(null);
-		if (servers != null && !servers.isEmpty()) {
-			// return 'jboss' server if available
-			for (int i = 0; i < servers.size(); i++) {
-				MBeanServer srv = (MBeanServer) servers.get(i);
-				if ("jboss".equalsIgnoreCase(srv.getDefaultDomain()))
-					return srv;
-			}
-
-			// return first available server
-			return (MBeanServer) servers.get(0);
-		}
-		else {
-			//if it all fails, create a default
-			return MBeanServerFactory.createMBeanServer();
-		}
-	}
+//    public static MBeanServer getMBeanServer() {
+//		ArrayList servers = MBeanServerFactory.findMBeanServer(null);
+//		if (servers != null && !servers.isEmpty()) {
+//			// return 'jboss' server if available
+//			for (int i = 0; i < servers.size(); i++) {
+//				MBeanServer srv = (MBeanServer) servers.get(i);
+//				if ("jboss".equalsIgnoreCase(srv.getDefaultDomain()))
+//					return srv;
+//			}
+//
+//			// return first available server
+//			return (MBeanServer) servers.get(0);
+//		}
+//		else {
+//			//if it all fails, create a default
+//			return MBeanServerFactory.createMBeanServer();
+//		}
+//	}
 
 
 //    public static void registerChannel(JChannel channel, String name) {
